@@ -1,0 +1,170 @@
+import { useState } from 'react';
+import { UNIDADES, ORDEN_UNIDADES } from '../data/teoria';
+import { guiasDe } from '../data/ejercicios';
+import { JUEGOS } from '../data/juegos';
+import Widget from './Widgets';
+
+export function Aprende() {
+  return (
+    <div className="pagina">
+      <h1 className="titulo-pag">📚 Aprende</h1>
+      <p className="lead-pag">Elige una unidad para repasar sus contenidos con explicaciones, ejemplos resueltos paso a paso y un laboratorio interactivo.</p>
+      <div className="tarjetas-unidad">
+        {ORDEN_UNIDADES.map((k) => {
+          const u = UNIDADES[k];
+          return (
+            <a key={k} href={`#/matematica/unidad/${k}`} className={`tarjeta-tipo u-${k}`}>
+              <span className="tt-ico">{u.icono}</span>
+              <strong>{u.nombre}</strong>
+              <span className="tt-lema">{u.lema}</span>
+              <ul className="tt-lista">{u.contenidos.map((c) => <li key={c}>{c}</li>)}</ul>
+              <span className="tt-ir">Ver unidad →</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function Flashcard({ p, r }) {
+  const [vuelta, setVuelta] = useState(false);
+  return (
+    <button type="button" className={`flash ${vuelta ? 'flash-on' : ''}`} onClick={() => setVuelta(!vuelta)} aria-pressed={vuelta}>
+      <span className="flash-cara flash-frente"><span className="flash-q">?</span>{p}<small>Toca para ver la respuesta</small></span>
+      <span className="flash-cara flash-atras">{r}</span>
+    </button>
+  );
+}
+
+// Ejemplo resuelto que se revela paso a paso.
+function Ejemplo({ ej, n }) {
+  const [vistos, setVistos] = useState(0);
+  const completo = vistos > ej.pasos.length;
+  return (
+    <div className="ejemplo-mat">
+      <p className="ejemplo-enun"><span className="ejemplo-n">Ejemplo {n}</span> {ej.enunciado}</p>
+      {vistos > 0 && (
+        <ol className="ejemplo-pasos">
+          {ej.pasos.slice(0, vistos).map((p) => <li key={p}>{p}</li>)}
+        </ol>
+      )}
+      {completo && <p className="ejemplo-resp">✅ {ej.respuesta}</p>}
+      <div className="ejemplo-acciones">
+        {!completo ? (
+          <>
+            <button type="button" className="btn btn-sm" onClick={() => setVistos(vistos + 1)}>
+              {vistos === 0 ? 'Ver la solución paso a paso' : vistos < ej.pasos.length ? 'Siguiente paso →' : 'Ver respuesta'}
+            </button>
+            {vistos === 0 && <button type="button" className="btn btn-sm btn-ghost" onClick={() => setVistos(ej.pasos.length + 1)}>Ver todo</button>}
+          </>
+        ) : (
+          <button type="button" className="btn btn-sm btn-ghost" onClick={() => setVistos(0)}>↺ Ocultar</button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Tema({ t, abierto, onToggle }) {
+  return (
+    <article className={`tema ${abierto ? 'tema-on' : ''}`}>
+      <button type="button" className="tema-head" onClick={onToggle} aria-expanded={abierto}>
+        <strong>{t.titulo}</strong>
+        <span className="fuente">📗 {t.pag}</span>
+        <span className="tema-flecha" aria-hidden>{abierto ? '▲' : '▼'}</span>
+      </button>
+      {abierto && (
+        <div className="tema-cuerpo">
+          <p className="tema-idea">{t.idea}</p>
+          {t.formula && <div className="formula">{t.formula}</div>}
+          {t.tabla && (
+            <div className="tabla-wrap">
+              <table className="tabla-datos tabla-lenguaje">
+                <tbody>
+                  {t.tabla.map((f) => (
+                    <tr key={f[0]}>{f.map((c, i) => (i === 0 ? <th key={i} scope="row">{c}</th> : <td key={i}><code>{c}</code></td>))}</tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          <ul className="check">{t.claves.map((c) => <li key={c}>{c}</li>)}</ul>
+          {t.ejemplos?.map((ej, i) => <Ejemplo key={ej.enunciado} ej={ej} n={i + 1} />)}
+        </div>
+      )}
+    </article>
+  );
+}
+
+export function FichaUnidad({ id }) {
+  const u = UNIDADES[id];
+  const [abierto, setAbierto] = useState(0);
+  if (!u) return <p className="pagina">Unidad no encontrada.</p>;
+  const idx = ORDEN_UNIDADES.indexOf(id);
+  const sig = ORDEN_UNIDADES[(idx + 1) % ORDEN_UNIDADES.length];
+  const guias = guiasDe(id);
+  const juegos = JUEGOS.filter((j) => j.unidad === id);
+
+  return (
+    <div className={`pagina ficha u-${id}`}>
+      <a className="volver" href="#/matematica/aprende">← Aprende</a>
+      <header className="ficha-hero">
+        <span className="ficha-ico">{u.icono}</span>
+        <div>
+          <p className="hero-kicker">Unidad de la prueba</p>
+          <h1>{u.nombre}</h1>
+          <p className="ficha-lema">{u.lema}</p>
+        </div>
+      </header>
+
+      <div className="proposito">
+        <span className="proposito-lbl">📋 Entra en la prueba</span>
+        <ul className="contenidos-prueba">{u.contenidos.map((c) => <li key={c}>{c}</li>)}</ul>
+      </div>
+
+      <section className="bloque">
+        <h2>Contenidos</h2>
+        <p className="ayuda">Toca cada tema para abrirlo. Prueba resolver los ejemplos antes de ver la solución.</p>
+        <div className="temas">
+          {u.temas.map((t, i) => (
+            <Tema key={t.id} t={t} abierto={abierto === i} onToggle={() => setAbierto(abierto === i ? -1 : i)} />
+          ))}
+        </div>
+      </section>
+
+      <Widget id={u.widget} />
+
+      <div className="dos-col">
+        <section className="bloque libro">
+          <h2>📗 En tu libro</h2>
+          <p>{u.libro}</p>
+          <p className="ayuda">Revisa también las páginas de <b>Síntesis</b> de cada unidad: Tomo 1, pp. 88–89 y 210–211 · Tomo 2, pp. 96 y 166–167.</p>
+        </section>
+        <section className="bloque errores">
+          <h2>⚠️ Errores comunes</h2>
+          <ul>{u.errores.map((x) => <li key={x}>{x}</li>)}</ul>
+        </section>
+      </div>
+
+      <section className="bloque">
+        <h2>Repaso rápido</h2>
+        <div className="flashes">
+          {u.flash.map((q) => <Flashcard key={q.p} p={q.p} r={q.r} />)}
+        </div>
+      </section>
+
+      <div className="ficha-acciones">
+        {guias.map((g) => (
+          <a key={g.id} className="btn btn-grande" href={`#/matematica/practica/${g.id}`}>✏️ {g.titulo}</a>
+        ))}
+        {juegos.map((j) => (
+          <a key={j.id} className="btn btn-grande btn-ghost" href={`#/matematica/juegos/${j.id}`}>{j.icono} {j.titulo}</a>
+        ))}
+      </div>
+      <div className="ficha-acciones">
+        <a className="btn btn-ghost" href={`#/matematica/unidad/${sig}`}>Siguiente: {UNIDADES[sig].icono} {UNIDADES[sig].nombre} →</a>
+      </div>
+    </div>
+  );
+}

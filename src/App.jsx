@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Menu from './Menu';
 import Lenguaje from './materias/lenguaje/Lenguaje';
+import Matematica from './materias/matematica/Matematica';
 
 // Enrutador mínimo basado en el hash (#/materia/...): funciona abriendo el archivo con doble clic.
 function useRuta() {
@@ -20,6 +21,7 @@ function useRuta() {
 // Componente raíz de cada materia disponible. Recibe la ruta sin el id de la materia.
 const MATERIAS = {
   lenguaje: Lenguaje,
+  matematica: Matematica,
 };
 
 export default function App() {

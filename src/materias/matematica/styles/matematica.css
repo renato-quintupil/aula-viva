@@ -1,0 +1,295 @@
+/* ───────── Matemática: tema de color ─────────
+   Reutiliza los componentes de Lenguaje (componentes.css) y cambia el acento a cian. */
+.mate {
+  --accent: #0891b2;
+  --accent-soft: #e0f7fb;
+  --u-razones: #e11d48;
+  --u-algebra: #7c3aed;
+  --u-decimales: #ea580c;
+  --u-area: #059669;
+  --u-datos: #2563eb;
+  --serie-0: #0891b2;
+  --serie-1: #f59e0b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .mate {
+    --accent: #22d3ee;
+    --accent-soft: #0f3640;
+    --u-razones: #fb7185;
+    --u-algebra: #a78bfa;
+    --u-decimales: #fb923c;
+    --u-area: #34d399;
+    --u-datos: #60a5fa;
+    --serie-0: #22d3ee;
+    --serie-1: #fbbf24;
+  }
+}
+
+.u-razones { --tc: var(--u-razones); }
+.u-algebra { --tc: var(--u-algebra); }
+.u-decimales { --tc: var(--u-decimales); }
+.u-area { --tc: var(--u-area); }
+.u-datos { --tc: var(--u-datos); }
+
+.mate .hero { background: linear-gradient(135deg, #0e7490 0%, #0891b2 45%, #7c3aed 100%); }
+.mate .hero .btn { color: #0e7490; }
+.mate .hero .btn-ghost { color: #fff; }
+.hero-mate .hero-tipo { font-size: 1.5rem; font-weight: 900; font-family: var(--font); }
+
+.centrado { text-align: center; margin-top: 18px; }
+.mate code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 0.95em; background: var(--bg-2); padding: 1px 6px; border-radius: 6px; white-space: nowrap; }
+
+/* ───────── Inicio ───────── */
+.temario-mate { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.temario-unidad {
+  display: block;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--line);
+  border-left: 6px solid var(--tc);
+  color: var(--text);
+  text-decoration: none;
+  background: var(--bg);
+  transition: border-color 0.15s, transform 0.15s;
+}
+.temario-unidad:hover { border-color: var(--tc); transform: translateY(-2px); }
+.temario-unidad strong { color: var(--tc); }
+.temario-unidad ul { margin: 6px 0 0; padding-left: 18px; font-size: 0.92rem; color: var(--muted); }
+.avance-tipos li .progreso-fill { background: var(--tc); }
+
+/* ───────── Aprende ───────── */
+.tarjetas-unidad { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+.tt-lista { margin: 0; padding-left: 18px; color: var(--muted); font-size: 0.9rem; flex: 1; }
+.contenidos-prueba { margin: 0; padding-left: 18px; display: grid; gap: 2px; }
+.ficha .proposito { align-items: flex-start; }
+
+.temas { display: grid; gap: 10px; }
+.tema { border: 2px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); overflow: hidden; }
+.tema-on { border-color: var(--tc); }
+.tema-head {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 4px 12px;
+  align-items: center;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  color: var(--text);
+  font-size: 1.02rem;
+}
+.tema-on .tema-head { background: color-mix(in srgb, var(--tc) 10%, var(--card)); }
+.tema-flecha { color: var(--tc); font-size: 0.8rem; }
+.tema-cuerpo { padding: 4px 16px 16px; animation: aparecer 0.25s ease; }
+.tema-idea { font-size: 1.04rem; }
+.formula {
+  margin: 0 0 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  border: 2px dashed var(--tc);
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-align: center;
+}
+.tabla-lenguaje th { width: 55%; }
+
+.ejemplo-mat { margin-top: 14px; padding: 14px 16px; border-radius: var(--radius-sm); background: var(--card); border-left: 5px solid var(--tc); }
+.ejemplo-enun { font-weight: 700; margin: 0 0 8px; }
+.ejemplo-n { display: inline-block; background: var(--tc); color: #fff; font-size: 0.78rem; font-weight: 900; padding: 2px 10px; border-radius: 999px; margin-right: 6px; }
+.ejemplo-pasos { margin: 0 0 8px; padding-left: 22px; display: grid; gap: 4px; }
+.ejemplo-pasos li { animation: aparecer 0.25s ease; }
+.ejemplo-resp { font-weight: 800; color: var(--ok); margin: 0 0 8px; animation: pop 0.3s ease; }
+.ejemplo-acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ───────── Tablas y gráficos ───────── */
+.tabla-datos-wrap { overflow-x: auto; margin-bottom: 12px; }
+.tabla-datos { border-collapse: collapse; background: var(--card); font-size: 0.95rem; min-width: 100%; }
+.tabla-datos th, .tabla-datos td { border: 1px solid var(--line); padding: 8px 12px; text-align: center; }
+.tabla-datos thead th { background: var(--accent); color: #fff; }
+.tabla-datos tbody th { background: var(--bg-2); text-align: left; }
+.tabla-lenguaje td { text-align: left; }
+
+.grafico { margin: 0 0 12px; padding: 12px; border-radius: var(--radius-sm); background: var(--card); border: 1px solid var(--line); }
+.grafico-titulo { font-weight: 900; text-align: center; margin: 0 0 6px; }
+.grafico svg { width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto; color: var(--text); }
+.grafico .guia { stroke: var(--line); stroke-width: 1; }
+.grafico .eje { stroke: var(--muted); stroke-width: 1.5; }
+.grafico .tick, .grafico .cat, .grafico .eje-txt { fill: currentColor; font-size: 12px; font-family: var(--font); }
+.grafico .cat { font-weight: 700; font-size: 13px; }
+.grafico .eje-txt { fill: var(--muted); }
+.serie-0 { fill: var(--serie-0); background: var(--serie-0); }
+.serie-1 { fill: var(--serie-1); background: var(--serie-1); }
+.leyenda { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
+.leyenda i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; }
+
+.apoyo-caja { display: flex; justify-content: center; margin-bottom: 8px; }
+.caja { width: 100%; max-width: 320px; height: auto; color: var(--text); }
+.caja-frente { fill: color-mix(in srgb, var(--tc, var(--accent)) 30%, var(--card)); stroke: var(--tc, var(--accent)); stroke-width: 2; stroke-linejoin: round; }
+.caja-arriba { fill: color-mix(in srgb, var(--tc, var(--accent)) 15%, var(--card)); stroke: var(--tc, var(--accent)); stroke-width: 2; stroke-linejoin: round; }
+.caja-lado { fill: color-mix(in srgb, var(--tc, var(--accent)) 45%, var(--card)); stroke: var(--tc, var(--accent)); stroke-width: 2; stroke-linejoin: round; }
+.caja-grid { stroke: var(--tc, var(--accent)); stroke-width: 0.8; opacity: 0.55; }
+.caja-medida { fill: currentColor; font-size: 13px; font-weight: 800; font-family: var(--font); }
+
+/* ───────── Laboratorios (widgets) ───────── */
+.widget { display: grid; gap: 12px; }
+.widget-controles { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: flex-end; }
+.widget-controles label, .widget-slider, .widget-num { display: grid; gap: 4px; font-weight: 700; font-size: 0.95rem; min-width: 160px; }
+.widget input[type='text'], .respuesta-num input {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 700;
+  max-width: 200px;
+}
+.widget input[type='text']:focus, .respuesta-num input:focus { outline: none; border-color: var(--accent); }
+.widget input[type='range'] { accent-color: var(--tc, var(--accent)); width: 100%; max-width: 280px; }
+.widget-resultado { font-size: 1.2rem; margin: 0; }
+.widget-paso { color: var(--muted); margin: 0; font-size: 0.95rem; }
+.widget-pasos { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.destacado { background: var(--tc, var(--accent)) !important; color: #fff; font-weight: 900; }
+
+.barra-pct { position: relative; height: 40px; border-radius: 10px; background: var(--bg-2); overflow: hidden; border: 2px solid var(--line); }
+.barra-pct-fill { position: absolute; inset: 0 auto 0 0; background: var(--tc, var(--accent)); transition: width 0.25s ease; }
+.barra-pct-div { position: absolute; top: 0; bottom: 0; width: 1px; background: color-mix(in srgb, var(--text) 25%, transparent); }
+.barra-pct-100 { position: absolute; top: 0; bottom: 0; border-left: 3px solid var(--text); padding-left: 4px; font-size: 0.75rem; font-weight: 900; display: flex; align-items: flex-end; }
+
+.coma-botones { display: flex; flex-wrap: wrap; gap: 8px; }
+.coma-hist { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.coma-hist li { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; padding: 8px 12px; background: var(--bg); border-radius: 8px; }
+.coma-hist li:first-child { border: 2px solid var(--tc, var(--accent)); }
+.coma-hist span { color: var(--muted); font-size: 0.88rem; }
+
+.widget-caja { grid-template-columns: 1fr; justify-items: start; }
+.widget-caja .caja { max-width: 360px; }
+.widget-cuentas p { margin: 0 0 6px; }
+.widget-cuentas small { color: var(--muted); }
+
+/* ───────── Preguntas numéricas ───────── */
+.respuesta-num { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 6px; }
+.unidad-txt { font-weight: 800; color: var(--muted); }
+.input-ok { border-color: var(--ok) !important; background: var(--ok-soft) !important; }
+.input-mal { border-color: var(--bad) !important; background: var(--bad-soft) !important; }
+.chip-unidad { background: color-mix(in srgb, var(--tc) 15%, var(--card)); color: var(--tc); }
+.pregunta .ayuda { margin: 0 0 8px; }
+
+/* ───────── Juegos ───────── */
+.subtitulo-juegos { margin: 28px 0 12px; font-size: 1.25rem; }
+.selector { border: none; padding: 0; margin: 0 0 16px; }
+.selector legend { font-weight: 800; margin-bottom: 8px; }
+
+.juego-zona { display: grid; gap: 4px; }
+.tarjeta-calculo {
+  text-align: center;
+  padding: 28px 20px;
+  border-radius: 24px;
+  background: var(--card);
+  border: 3px solid var(--line);
+  box-shadow: var(--shadow);
+  animation: aparecer 0.2s ease;
+}
+.calc-ok { border-color: var(--ok); background: color-mix(in srgb, var(--ok-soft) 70%, var(--card)); }
+.calc-mal { border-color: var(--bad); animation: temblar 0.35s ease; }
+.calculo { font-size: clamp(2rem, 8vw, 3.4rem); font-weight: 900; margin: 0 0 18px; font-variant-numeric: tabular-nums; line-height: 1.15; word-break: break-word; }
+.campo-juego { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.campo-juego input {
+  width: 180px;
+  max-width: 60vw;
+  padding: 12px 14px;
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+  border-radius: 16px;
+  border: 3px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.campo-juego input:focus { outline: none; border-color: var(--accent); }
+.campo-ok { border-color: var(--ok) !important; background: var(--ok-soft) !important; }
+.campo-mal { border-color: var(--bad) !important; background: var(--bad-soft) !important; }
+.juego-ok { color: var(--ok); font-weight: 900; font-size: 1.2rem; margin: 12px 0 0; }
+.juego-mal { margin-top: 14px; }
+.juego-mal p { margin: 0 0 8px; }
+.juego-mal-mini { color: var(--bad); font-weight: 800; margin: 12px 0 0; }
+
+.opciones-juego { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 460px; margin: 0 auto; }
+.opcion-juego {
+  padding: 16px 10px;
+  border-radius: 16px;
+  border: 3px solid var(--line);
+  background: var(--bg);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--text);
+  transition: transform 0.08s, border-color 0.12s;
+}
+.opcion-juego:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-2px); }
+.opcion-juego:disabled { cursor: default; }
+.oj-ok { border-color: var(--ok); background: var(--ok-soft); animation: pop 0.3s ease; }
+.oj-mal { border-color: var(--bad); background: var(--bad-soft); }
+
+.repaso-fallos { text-align: left; max-width: 420px; margin: 12px auto; padding: 12px 16px; background: var(--bad-soft); border-radius: var(--radius-sm); }
+.repaso-fallos ul { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 4px; }
+.record-nuevo { font-size: 1.3rem; font-weight: 900; color: #d97706; animation: pop 0.5s ease; }
+.reloj-final { font-size: 2.4rem; font-weight: 900; margin: 0; }
+.reloj-juego { font-variant-numeric: tabular-nums; }
+.reloj-urgente { color: var(--bad); animation: pop 1s ease infinite; }
+
+.tablas-chips { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 12px; max-width: 460px; }
+.chip-tabla {
+  aspect-ratio: 1;
+  border-radius: 14px;
+  border: 3px solid var(--line);
+  background: var(--card);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--text);
+}
+.chip-tabla-on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.tablas-estudio { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 8px; }
+.tabla-estudio { padding: 12px 14px; border-radius: var(--radius-sm); background: var(--bg); border: 1px solid var(--line); }
+.tabla-estudio strong { color: var(--accent); }
+.tabla-estudio ul { list-style: none; margin: 6px 0 0; padding: 0; font-variant-numeric: tabular-nums; }
+
+.memorice { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; perspective: 900px; max-width: 560px; width: 100%; margin: 0 auto; }
+.carta {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: none;
+  padding: 0;
+  background: transparent;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+.carta-on { transform: rotateY(180deg); }
+.carta-cara {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  backface-visibility: hidden;
+  font-weight: 900;
+  font-size: clamp(1rem, 3.5vw, 1.5rem);
+  box-shadow: var(--shadow);
+}
+.carta-dorso { background: linear-gradient(135deg, #0891b2, #7c3aed); color: #fff; font-size: 2rem; }
+.carta-frente { transform: rotateY(180deg); background: var(--card); border: 3px solid var(--accent); color: var(--text); }
+.carta-res .carta-frente { border-color: var(--serie-1); }
+.carta-hecha .carta-frente { background: var(--ok-soft); border-color: var(--ok); }
+
+@media (max-width: 639px) {
+  .tema-head { grid-template-columns: 1fr auto; }
+  .tema-head .fuente { grid-column: 1; grid-row: 2; }
+  .tablas-chips { grid-template-columns: repeat(4, 1fr); }
+  .memorice { grid-template-columns: repeat(3, 1fr); }
+  .tarjeta-calculo { padding: 22px 14px; }
+  .campo-juego input { font-size: 1.6rem; width: 140px; }
+  .widget-controles label { min-width: 100%; }
+}

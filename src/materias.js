@@ -24,8 +24,8 @@ export const MATERIAS = [
     color: '#0891b2',
     fecha: '2026-11-24',
     fechaTexto: 'martes 24 de noviembre',
-    temas: ['Razones y porcentajes', 'Patrones y álgebra', 'Decimales', 'Área y volumen', 'Datos y probabilidades'],
-    disponible: false,
+    temas: ['Razones y porcentajes', 'Patrones y álgebra', 'Decimales', 'Área y volumen', 'Datos y probabilidades', '🎮 Juegos de tablas y cálculo'],
+    disponible: true,
   },
   {
     id: 'historia',
