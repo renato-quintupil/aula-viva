@@ -1,0 +1,189 @@
+/* ───────── Estructura general y navegación responsive ─────────
+   Móvil (<640px): barra de navegación fija abajo con íconos.
+   Tablet (640–1023px): barra superior con íconos y texto.
+   Escritorio (≥1024px): barra superior y vistas a dos columnas. */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 24px;
+  height: var(--nav-h);
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.marca-ico {
+  font-size: 1.6rem;
+}
+
+.marca-txt small {
+  color: var(--muted);
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 700;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-link:hover {
+  background: var(--bg-2);
+  color: var(--text);
+}
+
+.nav-on {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.pagina {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 24px 48px;
+}
+
+.pagina-ancha {
+  max-width: 1320px;
+}
+
+.pie {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--muted);
+  padding: 20px 24px 28px;
+  border-top: 1px solid var(--line);
+}
+
+.dos-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Vista de práctica: texto + preguntas */
+.vista {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.vista-sola {
+  grid-template-columns: minmax(0, 720px);
+  justify-content: center;
+}
+
+.vista-texto {
+  position: sticky;
+  top: calc(var(--nav-h) + 16px);
+  max-height: calc(100vh - var(--nav-h) - 32px);
+  overflow-y: auto;
+  border-radius: var(--radius);
+  scrollbar-width: thin;
+}
+
+/* ───────── Tablet ───────── */
+@media (max-width: 1023px) {
+  .vista {
+    grid-template-columns: 1fr;
+  }
+
+  .vista-texto {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .marca-txt small {
+    display: none;
+  }
+}
+
+/* ───────── Móvil ───────── */
+@media (max-width: 639px) {
+  body {
+    font-size: 16px;
+  }
+
+  .topbar {
+    padding: 0 16px;
+    height: 56px;
+    /* backdrop-filter crearía un bloque contenedor y "atraparía" la nav fija */
+    backdrop-filter: none;
+    background: var(--card);
+  }
+
+  .nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: space-around;
+    background: var(--card);
+    border-top: 1px solid var(--line);
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    z-index: 30;
+  }
+
+  .nav-link {
+    flex-direction: column;
+    gap: 0;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.72rem;
+  }
+
+  .nav-ico {
+    font-size: 1.35rem;
+  }
+
+  .app {
+    padding-bottom: 72px;
+  }
+
+  .pagina {
+    padding: 20px 16px 40px;
+  }
+
+  .dos-col {
+    grid-template-columns: 1fr;
+  }
+}
