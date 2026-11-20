@@ -1,0 +1,158 @@
+/* ───────── Historia: tema de color ─────────
+   Reutiliza componentes.css (Lenguaje) y matematica.css; cambia el acento a ámbar. */
+.hist {
+  --accent: #b45309;
+  --accent-soft: #fef3c7;
+  --u-cuestion: #92400e;
+  --u-democracia: #2563eb;
+  --u-dictadura: #be123c;
+  --u-regiones: #059669;
+  --u-zonas: #0891b2;
+  --z0: #d97706;
+  --z1: #ca8a04;
+  --z2: #16a34a;
+  --z3: #0f766e;
+  --z4: #2563eb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .hist {
+    --accent: #fbbf24;
+    --accent-soft: #3b2a0a;
+    --u-cuestion: #fbbf24;
+    --u-democracia: #60a5fa;
+    --u-dictadura: #fb7185;
+    --u-regiones: #34d399;
+    --u-zonas: #22d3ee;
+    --z0: #fbbf24;
+    --z1: #facc15;
+    --z2: #4ade80;
+    --z3: #2dd4bf;
+    --z4: #60a5fa;
+  }
+}
+
+.u-cuestion { --tc: var(--u-cuestion); }
+.u-democracia { --tc: var(--u-democracia); }
+.u-dictadura { --tc: var(--u-dictadura); }
+.u-regiones { --tc: var(--u-regiones); }
+.u-zonas { --tc: var(--u-zonas); }
+
+.hist .hero { background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #0f766e 100%); }
+.hist .hero .btn { color: #92400e; }
+.hist .hero .btn-ghost { color: #fff; }
+.hist .carta-dorso { background: linear-gradient(135deg, #b45309, #0f766e); }
+
+.temario-bloque + .temario-bloque { margin-top: 16px; }
+.temario-bloque h3 { margin: 0 0 8px; font-size: 1rem; color: var(--muted); }
+
+/* Fuentes históricas */
+.fuente-hist {
+  margin: 12px 0;
+  padding: 12px 16px;
+  border-left: 5px solid var(--tc, var(--accent));
+  background: color-mix(in srgb, var(--tc, var(--accent)) 8%, var(--card));
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.fuente-hist p { margin: 0 0 6px; font-style: italic; }
+.fuente-hist cite { font-size: 0.85rem; color: var(--muted); font-style: normal; font-weight: 700; }
+.tabla-hist th { width: 32%; }
+.tabla-hist td { text-align: left; }
+
+/* Línea de tiempo */
+.linea-tiempo { list-style: none; margin: 0; padding: 0 0 0 22px; border-left: 4px solid var(--tc, var(--accent)); display: grid; gap: 8px; }
+.linea-tiempo li { position: relative; }
+.linea-tiempo li::before {
+  content: '';
+  position: absolute;
+  left: -31px;
+  top: 14px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 4px solid var(--tc, var(--accent));
+}
+.linea-tiempo button {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 2px solid transparent;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+.lt-anio { font-weight: 900; color: var(--tc, var(--accent)); min-width: 3.2em; font-variant-numeric: tabular-nums; }
+.lt-on button { border-color: var(--tc, var(--accent)); background: color-mix(in srgb, var(--tc, var(--accent)) 12%, var(--card)); }
+.lt-on::before { background: var(--tc, var(--accent)) !important; }
+
+/* Regiones */
+.regiones-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: rg; }
+.regiones-lista li {
+  counter-increment: rg;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.8fr) minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  border-left: 6px solid var(--zc);
+}
+.rg-nombre { display: grid; }
+.rg-nombre b::before { content: counter(rg) '. '; color: var(--muted); }
+.rg-nombre small, .rg-pob small { color: var(--muted); font-size: 0.82rem; }
+.rg-zona { font-size: 0.85rem; font-weight: 800; color: var(--zc); }
+.rg-pob { display: grid; gap: 2px; }
+.rg-barra { height: 8px; border-radius: 99px; background: var(--bg-2); overflow: hidden; }
+.rg-barra span { display: block; height: 100%; background: var(--zc); }
+.zona-0 { --zc: var(--z0); }
+.zona-1 { --zc: var(--z1); }
+.zona-2 { --zc: var(--z2); }
+.zona-3 { --zc: var(--z3); }
+.zona-4 { --zc: var(--z4); }
+
+/* Zonas naturales */
+.zonas-franja { display: grid; gap: 10px; }
+.zona-card { padding: 12px 16px; border-radius: var(--radius-sm); background: var(--bg); border-left: 6px solid var(--zc); }
+.zona-card strong { color: var(--zc); font-size: 1.1rem; }
+.zona-card dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 6px 0 0; font-size: 0.93rem; }
+.zona-card dt { font-weight: 800; color: var(--muted); }
+.zona-card dd { margin: 0; }
+
+/* Juegos */
+.calculo-txt { font-size: clamp(1.15rem, 4vw, 1.6rem); line-height: 1.35; }
+.opcion-juego-txt { font-size: 1rem; padding: 12px; }
+.tarjeta-hist .opciones-juego { max-width: 620px; }
+.orden-pista { font-weight: 800; text-align: center; margin: 8px 0; }
+.orden-slots { list-style: none; margin: 0 auto 14px; padding: 0; display: grid; gap: 6px; max-width: 620px; width: 100%; }
+.orden-slots li { display: flex; gap: 10px; align-items: center; padding: 8px 12px; border-radius: var(--radius-sm); border: 2px dashed var(--line); min-height: 44px; }
+.orden-slots .slot-on { border-style: solid; border-color: var(--ok); background: var(--ok-soft); animation: pop 0.3s ease; }
+.slot-n { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 900; font-size: 0.85rem; flex: none; }
+.slot-vacio { color: var(--muted); }
+.orden-cartas { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; max-width: 620px; width: 100%; margin: 0 auto; }
+.orden-carta {
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: 3px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+}
+.orden-carta:hover { border-color: var(--accent); transform: translateY(-2px); }
+.orden-mal { border-color: var(--bad); background: var(--bad-soft); animation: temblar 0.35s ease; }
+.resultado-ronda { text-align: center; }
+.memorice-hist .carta { aspect-ratio: 5 / 4; }
+.memorice-hist .carta-frente { font-size: clamp(0.75rem, 2.4vw, 0.95rem); padding: 6px; line-height: 1.2; text-align: center; }
+
+@media (max-width: 639px) {
+  .regiones-lista li { grid-template-columns: 1fr auto; }
+  .rg-pob { grid-column: 1 / -1; }
+  .memorice-hist { grid-template-columns: repeat(3, 1fr); }
+}

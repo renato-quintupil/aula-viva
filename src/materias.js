@@ -35,8 +35,8 @@ export const MATERIAS = [
     color: '#b45309',
     fecha: '2026-11-26',
     fechaTexto: 'jueves 26 de noviembre',
-    temas: ['Chile en el siglo XX', 'Geografía de Chile'],
-    disponible: false,
+    temas: ['Cuestión social y movimiento obrero', 'Democratización y Estado benefactor', 'Golpe de Estado y dictadura', 'Regiones de Chile', 'Zonas y ambientes naturales', '🎮 Juegos de historia y geografía'],
+    disponible: true,
   },
   {
     id: 'ciencias',

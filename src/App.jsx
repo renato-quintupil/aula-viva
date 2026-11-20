@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Menu from './Menu';
 import Lenguaje from './materias/lenguaje/Lenguaje';
 import Matematica from './materias/matematica/Matematica';
+import Historia from './materias/historia/Historia';
 
 // Enrutador mínimo basado en el hash (#/materia/...): funciona abriendo el archivo con doble clic.
 function useRuta() {
@@ -22,6 +23,7 @@ function useRuta() {
 const MATERIAS = {
   lenguaje: Lenguaje,
   matematica: Matematica,
+  historia: Historia,
 };
 
 export default function App() {
