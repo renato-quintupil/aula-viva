@@ -46,7 +46,7 @@ export const MATERIAS = [
     color: '#059669',
     fecha: '2026-11-30',
     fechaTexto: 'lunes 30 de noviembre',
-    temas: ['La materia que nos rodea', 'La Tierra y los seres vivos'],
-    disponible: false,
+    temas: ['Estados de la materia', 'Cambios de estado', 'Capas de la Tierra', 'Suelo y erosión', 'Fotosíntesis', 'Redes tróficas', '🎮 Juegos de ciencias'],
+    disponible: true,
   },
 ];

@@ -1,0 +1,98 @@
+/* ───────── Ciencias: tema de color ─────────
+   Se carga después de historia.css y cambia el acento a verde. */
+.cien {
+  --accent: #059669;
+  --accent-soft: #d1fae5;
+  --u-particulas: #2563eb;
+  --u-cambios: #0891b2;
+  --u-capas: #7c3aed;
+  --u-suelo: #a16207;
+  --u-fotosintesis: #16a34a;
+  --u-redes: #ea580c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .cien {
+    --accent: #34d399;
+    --accent-soft: #0b3b2e;
+    --u-particulas: #60a5fa;
+    --u-cambios: #22d3ee;
+    --u-capas: #a78bfa;
+    --u-suelo: #facc15;
+    --u-fotosintesis: #4ade80;
+    --u-redes: #fb923c;
+  }
+}
+
+.u-particulas { --tc: var(--u-particulas); }
+.u-cambios { --tc: var(--u-cambios); }
+.u-capas { --tc: var(--u-capas); }
+.u-suelo { --tc: var(--u-suelo); }
+.u-fotosintesis { --tc: var(--u-fotosintesis); }
+.u-redes { --tc: var(--u-redes); }
+
+.cien .hero { background: linear-gradient(135deg, #065f46 0%, #059669 50%, #2563eb 100%); }
+.cien .hero .btn { color: #065f46; }
+.cien .hero .btn-ghost { color: #fff; }
+.cien .carta-dorso { background: linear-gradient(135deg, #059669, #2563eb); }
+
+.dato-cien { margin: 12px 0 0; padding: 10px 14px; border-radius: var(--radius-sm); background: color-mix(in srgb, var(--tc, var(--accent)) 10%, var(--card)); border: 1px dashed var(--tc, var(--accent)); }
+
+/* Simulador de partículas */
+.sim { display: grid; grid-template-columns: minmax(0, 260px) 1fr; gap: 18px; align-items: center; }
+.sim-caja { width: 100%; height: auto; }
+.sim-recipiente { fill: var(--bg); stroke: var(--muted); stroke-width: 3; }
+.sim-part { fill: var(--u-cambios); stroke: var(--card); stroke-width: 1.5; transition-property: cx, cy; transition-timing-function: ease-in-out; }
+.sim-solido .sim-part { fill: var(--u-particulas); animation: vibrar 0.25s ease-in-out infinite alternate; }
+.sim-gas .sim-part { fill: #f97316; }
+@keyframes vibrar { from { transform: translate(-0.8px, 0.6px); } to { transform: translate(0.8px, -0.6px); } }
+.sim-panel p { margin: 0 0 8px; }
+.sim-temp { display: grid; gap: 6px; font-weight: 700; margin-bottom: 10px; }
+.sim-temp input { accent-color: var(--accent); width: 100%; max-width: 340px; }
+.sim-estado { font-size: 1.2rem; font-weight: 900; color: var(--accent); }
+
+/* Curva de calentamiento */
+.curva { display: grid; grid-template-columns: minmax(0, 1.4fr) 1fr; gap: 18px; align-items: center; }
+.curva svg { width: 100%; height: auto; color: var(--text); }
+.curva .eje { stroke: var(--muted); stroke-width: 1.5; }
+.curva .guia { stroke: var(--line); stroke-dasharray: 4 4; }
+.curva .tick, .curva .eje-txt { fill: var(--muted); font-size: 11px; font-family: var(--font); }
+.tramo { cursor: pointer; }
+.tramo-hit { stroke: transparent; stroke-width: 18; }
+.tramo-linea { stroke: var(--u-cambios); stroke-width: 4; stroke-linecap: round; }
+.tramo-on .tramo-linea { stroke: #f97316; stroke-width: 6; }
+.tramo-txt { fill: currentColor; font-size: 11px; font-weight: 800; font-family: var(--font); }
+.curva-info strong { color: var(--accent); }
+
+/* Capas de la atmósfera */
+.atm { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 4px; }
+.atm li { display: grid; grid-template-columns: 130px 120px 1fr; gap: 10px; align-items: center; padding: 10px 14px; border-radius: 10px; color: #fff; }
+.atm .atm-0 { background: #1e1b4b; }
+.atm .atm-1 { background: #312e81; }
+.atm .atm-2 { background: #4338ca; }
+.atm .atm-3 { background: #2563eb; }
+.atm .atm-4 { background: #0ea5e9; }
+.atm .atm-suelo { display: block; background: #65a30d; text-align: center; font-weight: 800; }
+.atm-alt { font-size: 0.85rem; opacity: 0.85; }
+
+/* Fotosíntesis */
+.ecuacion { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; }
+.ec-item { display: grid; text-align: center; padding: 10px 14px; border-radius: var(--radius-sm); background: var(--bg); border: 2px solid var(--line); font-weight: 800; min-width: 96px; }
+.ec-item small { font-weight: 500; color: var(--muted); font-size: 0.75rem; max-width: 130px; }
+.ec-prod { border-color: var(--u-fotosintesis); background: color-mix(in srgb, var(--u-fotosintesis) 12%, var(--card)); transition: filter 0.3s; }
+.ec-oculto { filter: blur(6px); }
+.ec-op { font-size: 1.4rem; font-weight: 900; color: var(--muted); }
+
+/* Cadena alimentaria */
+.cadena { margin: 14px 0 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.cadena-ser { display: grid; text-align: center; padding: 10px 14px; border-radius: var(--radius-sm); background: color-mix(in srgb, var(--u-redes) 12%, var(--card)); border: 2px solid var(--u-redes); }
+.cadena-ser:first-child { background: color-mix(in srgb, var(--u-fotosintesis) 15%, var(--card)); border-color: var(--u-fotosintesis); }
+.cadena-flecha { font-size: 1.4rem; font-weight: 900; color: var(--muted); }
+.cadena small { color: var(--muted); font-size: 0.78rem; }
+
+@media (max-width: 639px) {
+  .sim, .curva { grid-template-columns: 1fr; }
+  .sim-caja { max-width: 260px; margin: 0 auto; }
+  .atm li { grid-template-columns: 1fr auto; }
+  .atm li > span:last-child { grid-column: 1 / -1; }
+}
